@@ -11,9 +11,9 @@ public class Patients {
 	
 	
 
-	public Patients(String id, String name, String owner, String species, String diagnosis, String lastSession) {
+	public Patients(String key, String name, String owner, String species, String diagnosis, String lastSession) {
 		
-		this.id = id;
+		this.key = key;
 		this.name = name;
 		this.owner = owner;
 		this.species = species;
@@ -24,7 +24,7 @@ public class Patients {
 
 
 	@Id
-    private String id;
+    private String key;
     
 	
 	@Field
@@ -48,14 +48,18 @@ public class Patients {
 
 
 
-	public String getId() {
-		return id;
+	
+
+
+
+	public String getKey() {
+		return key;
 	}
 
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 
