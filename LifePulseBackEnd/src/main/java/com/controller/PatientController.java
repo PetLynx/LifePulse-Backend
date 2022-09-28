@@ -21,7 +21,7 @@ public class PatientController {
 	
 	
 	
-	@PostMapping("/addPatients")
+	@GetMapping("/addPatients")
 	public void addPatients()
 	{
 			
