@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import com.dto.PatientRequest;
 import com.entity.Patients;
 import com.entity.TherapyPatient;
+import com.entity.Treatment;
 import com.google.gson.Gson;
 
 @RestController
@@ -112,6 +113,22 @@ public class PatientController {
 	    	theraphyFields.put("retreat", jsonObject.getString("retreat"));
 	    	theraphyFields.put("nacrosis", jsonObject.getString("nacrosis"));
 	    	thp.setTheraphyFields(theraphyFields);
+	    	//Hard coded treatment
+	    	Treatment treatmentOne  =  new Treatment();
+	    	treatmentOne.setTreatmentName("#Treatment 1");
+	    	treatmentOne.setSpecialist("John Hughes");
+	    	treatmentOne.setSessionLength("30 minutes");
+	    	treatmentOne.setDate("07/15/2022");
+	    	
+	    	Treatment treatMentTwo  =  new Treatment();
+	    	treatMentTwo.setTreatmentName("#Treatment 1");
+	    	treatMentTwo.setSpecialist("John Hughes");
+	    	treatMentTwo.setSessionLength("30 minutes");
+	    	treatMentTwo.setDate("07/15/2022");
+	    	
+	    	thp.getTreatments().add(treatmentOne);
+	    	thp.getTreatments().add(treatMentTwo);
+	    	// End of Hard coded treatment
 	    	theraphies.add(thp);
 	    	patient.setTheraphies(theraphies);
 	    	mongoTemplate.insert(patient);
