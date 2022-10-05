@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class TherapyPatient {
 	@Field
 	private Map<String,String> theraphyFields;
 	@Field
-	private Map<String,List<Treatment>> treatments;
+	private List<Treatment> treatments =  new ArrayList<Treatment>();
 	
 	
 	
@@ -41,12 +42,13 @@ public class TherapyPatient {
 	public void setTheraphyFields(Map<String, String> theraphyFields) {
 		this.theraphyFields = theraphyFields;
 	}
-	public Map<String, List<Treatment>> getTreatments() {
+	public List<Treatment> getTreatments() {
 		return treatments;
 	}
-	public void setTreatments(Map<String, List<Treatment>> treatments) {
+	public void setTreatments(List<Treatment> treatments) {
 		this.treatments = treatments;
 	}
+	
 	
 	
 	

@@ -1,4 +1,5 @@
 package com.entity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,15 +13,15 @@ public class Patients {
 	
 	
 
-	public Patients(String key, String name, String owner, String species, String diagnosis, String lastSession) {
-		
-		this.key = key;
-		this.name = name;
-		this.owner = owner;
-		this.species = species;
-		this.diagnosis = diagnosis;
-		this.lastSession = lastSession;
-	}
+//	public Patients(String key, String name, String owner, String species, String diagnosis, String lastSession) {
+//		
+//		this.key = key;
+//		this.name = name;
+//		this.owner = owner;
+//		this.species = species;
+//		this.diagnosis = diagnosis;
+//		this.lastSession = lastSession;
+//	}
 
 
 
@@ -35,6 +36,13 @@ public class Patients {
 	@Field
     private String owner;
 	
+	@Field
+    private String ownerContact;
+	
+	
+
+
+
 	@Field
     private String species;
 	
@@ -66,7 +74,33 @@ public class Patients {
 	private Map<String,String> histology;
 	
 	@Field
-	private TherapyPatient theraphies;
+	private List<TherapyPatient> theraphies =  new ArrayList<TherapyPatient>();
+	
+	public Map<String, String> getHistology() {
+		return histology;
+	}
+
+
+
+	public void setHistology(Map<String, String> histology) {
+		this.histology = histology;
+	}
+
+
+
+	public List<TherapyPatient> getTheraphies() {
+		return theraphies;
+	}
+
+
+
+	public void setTheraphies(List<TherapyPatient> theraphies) {
+		this.theraphies = theraphies;
+	}
+
+
+
+	
 	
 	
 	public String getKey() {
@@ -189,6 +223,14 @@ public class Patients {
 	
 	
 	
-	
+	public String getOwnerContact() {
+		return ownerContact;
+	}
+
+
+
+	public void setOwnerContact(String ownerContact) {
+		this.ownerContact = ownerContact;
+	}
 
 }
