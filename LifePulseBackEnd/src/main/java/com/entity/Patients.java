@@ -1,5 +1,6 @@
 package com.entity;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -47,11 +48,27 @@ public class Patients {
     private String lastSession;
 
 
-
+	@Field
+    private String breed;
 	
+	@Field
+    private String dob;
 
-
-
+	@Field
+    private String sex;
+	
+	@Field
+    private String reproduction;
+	
+	
+	
+	@Field
+	private Map<String,String> histology;
+	
+	@Field
+	private TherapyPatient theraphies;
+	
+	
 	public String getKey() {
 		return key;
 	}
@@ -120,6 +137,54 @@ public class Patients {
 
 	public void setLastSession(String lastSession) {
 		this.lastSession = lastSession;
+	}
+
+
+
+	public String getBreed() {
+		return breed;
+	}
+
+
+
+	public void setBreed(String breed) {
+		this.breed = breed;
+	}
+
+
+
+	public String getDob() {
+		return dob;
+	}
+
+
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+
+
+	public String getSex() {
+		return sex;
+	}
+
+
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+
+
+	public String getReproduction() {
+		return reproduction;
+	}
+
+
+
+	public void setReproduction(String reproduction) {
+		this.reproduction = reproduction;
 	}
 	
 	
