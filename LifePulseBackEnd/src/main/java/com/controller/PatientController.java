@@ -80,6 +80,7 @@ public class PatientController {
 	    	patient.setBreed(jsonObject.getString("breed"));
 	    	patient.setDob(jsonObject.getString("dob"));
 	    	patient.setSex(jsonObject.getString("sex"));
+	    	patient.setDiagnosis(jsonObject.getString("diagnosis"));
 	    	patient.setReproduction(jsonObject.getString("reproduction"));
 	    	
 	    	Map<String,String>  histology = new HashMap<String,String>();
