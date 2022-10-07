@@ -141,7 +141,10 @@ public class PatientController {
 	}
 	@DeleteMapping("/patient/{patientId}")
 	public String deletePatient(@PathVariable String patientId) {
-	mongoTemplate.remove(new Query(Criteria.where("id").is(patientId)), Patients.class);
+
+		Patients patient = mongoTemplate.findById(patientId, Patients.class);
+		mongoTemplate.remove(patient);
+	
 	return "Delete successful";
 	}
 	
