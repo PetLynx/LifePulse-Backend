@@ -7,8 +7,12 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,6 +139,50 @@ public class PatientController {
 	    	mongoTemplate.insert(patient);
 	    	
 	}
+	@DeleteMapping("/patient/{patientId}")
+	public String deletePatient(@PathVariable String patientId) {
+	mongoTemplate.remove(new Query(Criteria.where("id").is(patientId)), Patients.class);
+	return "Delete successful";
+	}
+	
+	@PostMapping("/addtherapy/{patientId}")
+	public void addPatientTheraphy(@RequestBody Object requestBody, @PathVariable String patientId)
+	{
+	Patients patient = mongoTemplate.findById(patientId, Patients.class);
+	String reqBody = new Gson().toJson(requestBody);
+	       JSONObject jsonObject = new JSONObject(reqBody);
+	    System.out.println(jsonObject);
+	   
+	    UUID tid = UUID.randomUUID();
+	    TherapyPatient thp = new TherapyPatient();
+	    thp.setKey(tid.toString());
+	    thp.setTherpahyName(jsonObject.getString("theraphyName"));
+	    Map<String,String> theraphyFields = new HashMap<String,String>();
+	    theraphyFields.put("theraphyName", jsonObject.getString("theraphyName"));
+	    theraphyFields.put("tindication", jsonObject.getString("tindication"));
+	    theraphyFields.put("tumorType", jsonObject.getString("tumorType"));
+	    theraphyFields.put("tumorVolume", jsonObject.getString("tumorVolume"));
+	    theraphyFields.put("grade", jsonObject.getString("grade"));
+	    theraphyFields.put("cellType", jsonObject.getString("cellType"));
+	    theraphyFields.put("tnmStage", jsonObject.getString("tnmStage"));
+	    theraphyFields.put("overAllStage", jsonObject.getString("overAllStage"));
+	    theraphyFields.put("pweight", jsonObject.getString("pweight"));
+	    theraphyFields.put("therapeutic", jsonObject.getString("therapeutic"));
+	    theraphyFields.put("tname", jsonObject.getString("tname"));
+	    theraphyFields.put("ivolume", jsonObject.getString("ivolume"));
+	    theraphyFields.put("ores", jsonObject.getString("ores"));
+	    theraphyFields.put("retreat", jsonObject.getString("retreat"));
+	    theraphyFields.put("nacrosis", jsonObject.getString("nacrosis"));
+	    thp.setTheraphyFields(theraphyFields);
+	   
+	    List<TherapyPatient> therapies = patient.getTheraphies();
+	    therapies.add(thp);
+	    patient.setTheraphies(therapies);
+	    mongoTemplate.save(patient);
+	   
+
+	}
+
 	
 
 }
