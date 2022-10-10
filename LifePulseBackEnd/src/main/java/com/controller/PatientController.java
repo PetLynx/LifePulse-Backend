@@ -82,6 +82,20 @@ public class PatientController {
 	    	patient.setDiagnosis(jsonObject.getString("diagnosis"));
 	    	patient.setReproduction(jsonObject.getString("reproduction"));
 	    	
+	    	
+	    	JSONArray allergie = jsonObject.getJSONArray("allergyList");
+	    	
+	    	//Adding Patient
+	    	
+	    	List<String> list = new ArrayList<String>();     
+	    	JSONArray jsonArray = (JSONArray)allergie; 
+	    	if (jsonArray != null) { 
+	    	   int len = jsonArray.length();
+	    	   for (int i=0;i<len;i++){ 
+	    	    list.add(jsonArray.get(i).toString());
+	    	   } 
+	    	} 
+	    	patient.setAllergies(list);
 	    	Map<String,String>  histology = new HashMap<String,String>();
 	    	histology.put("diagnosis", jsonObject.getString("diagnosis"));
 	    	histology.put("indication", jsonObject.getString("indication"));
