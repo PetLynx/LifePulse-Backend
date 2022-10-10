@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import com.dto.PatientRequest;
 import com.entity.Patients;
 import com.entity.TherapyPatient;
 import com.entity.Treatment;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -63,6 +65,36 @@ public class PatientController {
 	}
 	
 	
+	@PostMapping("/updatePatient")
+	public void updatePatient(@RequestBody Object requestBody)
+	{
+		
+		 String reqBody = new Gson().toJson(requestBody);
+	        JSONObject jsonObject = new JSONObject(reqBody);
+	    	System.out.println(jsonObject);
+	    	Patients patient = mongoTemplate.findById(jsonObject.getString("id"), Patients.class);
+	    	patient.setOwner(jsonObject.getString("owner"));
+	    	patient.setOwnerContact(jsonObject.getString("ownerContact"));
+	    	patient.setSpecies(jsonObject.getString("species"));
+	    	patient.setBreed(jsonObject.getString("breed"));
+	    	patient.setDob(jsonObject.getString("dob"));
+	    	patient.setSex(jsonObject.getString("sex"));
+	    	patient.setDiagnosis(jsonObject.getString("diagnosis"));
+	    	patient.setReproduction(jsonObject.getString("reproduction"));
+	    	
+	    	Map<String,String>  histology = new HashMap<String,String>();
+	    	histology.put("diagnosis", jsonObject.getString("diagnosis"));
+	    	histology.put("indication", jsonObject.getString("indication"));
+	    	histology.put("initMassSize", jsonObject.getString("initMassSize"));
+	    	histology.put("vaccinations", jsonObject.getString("vaccinations"));
+	    	histology.put("weight", jsonObject.getString("weight"));
+	    	histology.put("comorbidity", jsonObject.getString("comorbidity"));
+	    	patient.setHistology(histology);
+	    	mongoTemplate.save(patient);
+	    	
+	    	
+	}
+	
 	@PostMapping("/addpatient")
 	public void addPatient(@RequestBody Object requestBody)
 	{
@@ -72,6 +104,7 @@ public class PatientController {
 	        JSONObject jsonObject = new JSONObject(reqBody);
 	    	System.out.println(jsonObject);
 	    	
+	    	JSONArray allergie = jsonObject.getJSONArray("allergyList");
 	    	
 	    	//Adding Patient
 	    	
@@ -95,6 +128,8 @@ public class PatientController {
 	    	histology.put("weight", jsonObject.getString("weight"));
 	    	histology.put("comorbidity", jsonObject.getString("comorbidity"));
 	    	patient.setHistology(histology);
+	    	
+	    	patient.setAllergies(allergie);
 	    	
 	    	List<TherapyPatient> theraphies =  new ArrayList<TherapyPatient>();
 	    	UUID tid = UUID.randomUUID();
