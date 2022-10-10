@@ -70,8 +70,12 @@ public class Patients {
     private String reproduction;
 	
 	@Field
-	private JSONArray allergies;
+	private List<String> allergies;
 	
+	
+
+
+
 	@Field
 	private Map<String,String> histology;
 	
@@ -237,16 +241,16 @@ public class Patients {
 
 
 
-	public JSONArray getAllergies() {
+	
+	public List<String> getAllergies() {
 		return allergies;
 	}
 
 
 
-	public void setAllergies(JSONArray allergies) {
+	public void setAllergies(List<String> allergies) {
 		this.allergies = allergies;
 	}
-	
 	
 	
 

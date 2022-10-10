@@ -108,6 +108,15 @@ public class PatientController {
 	    	
 	    	//Adding Patient
 	    	
+	    	List<String> list = new ArrayList<String>();     
+	    	JSONArray jsonArray = (JSONArray)allergie; 
+	    	if (jsonArray != null) { 
+	    	   int len = jsonArray.length();
+	    	   for (int i=0;i<len;i++){ 
+	    	    list.add(jsonArray.get(i).toString());
+	    	   } 
+	    	} 
+	    	
 	    	Patients patient = new Patients();
 	    	patient.setKey(pid.toString());
 	    	patient.setName(jsonObject.getString("name"));
@@ -129,7 +138,7 @@ public class PatientController {
 	    	histology.put("comorbidity", jsonObject.getString("comorbidity"));
 	    	patient.setHistology(histology);
 	    	
-	    	patient.setAllergies(allergie);
+	    	patient.setAllergies(list);
 	    	
 	    	List<TherapyPatient> theraphies =  new ArrayList<TherapyPatient>();
 	    	UUID tid = UUID.randomUUID();
