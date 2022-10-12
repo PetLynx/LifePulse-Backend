@@ -73,6 +73,7 @@ public class PatientController {
 	        JSONObject jsonObject = new JSONObject(reqBody);
 	    	System.out.println(jsonObject);
 	    	Patients patient = mongoTemplate.findById(jsonObject.getString("id"), Patients.class);
+	    	patient.setName(jsonObject.getString("name"));
 	    	patient.setOwner(jsonObject.getString("owner"));
 	    	patient.setOwnerContact(jsonObject.getString("ownerContact"));
 	    	patient.setSpecies(jsonObject.getString("species"));
@@ -177,20 +178,12 @@ public class PatientController {
 	    	theraphyFields.put("nacrosis", jsonObject.getString("nacrosis"));
 	    	thp.setTheraphyFields(theraphyFields);
 	    	//Hard coded treatment
-	    	Treatment treatmentOne  =  new Treatment();
-	    	treatmentOne.setTreatmentName("#Treatment 1");
-	    	treatmentOne.setSpecialist("John Hughes");
-	    	treatmentOne.setSessionLength("30 minutes");
-	    	treatmentOne.setDate("07/15/2022");
+	    
 	    	
-	    	Treatment treatMentTwo  =  new Treatment();
-	    	treatMentTwo.setTreatmentName("#Treatment 1");
-	    	treatMentTwo.setSpecialist("John Hughes");
-	    	treatMentTwo.setSessionLength("30 minutes");
-	    	treatMentTwo.setDate("07/15/2022");
 	    	
-	    	thp.getTreatments().add(treatmentOne);
-	    	thp.getTreatments().add(treatMentTwo);
+	    	
+	    	
+	    	
 	    	// End of Hard coded treatment
 	    	theraphies.add(thp);
 	    	patient.setTheraphies(theraphies);
