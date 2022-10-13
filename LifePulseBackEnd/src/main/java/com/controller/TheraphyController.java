@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,10 @@ public class TheraphyController {
 				    treat.setTreatmentName("Treatment "+size);
 				    treat.setSessionLength("30 minutes");
 				    treat.setSpecialist("Gary");
-				    treat.setDate("12-10-2022");
+				    LocalDate dateObj = LocalDate.now();
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			        String date = dateObj.format(formatter);
+				    treat.setDate(date);
 				
 				    th.getTreatments().add(treat);
 				    mongoTemplate.save(patient);
